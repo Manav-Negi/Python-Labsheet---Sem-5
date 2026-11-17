@@ -1,0 +1,422 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# NumPy Exercises
+",
+    "This notebook contains solutions to the requested NumPy basics and advanced operations exercises."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Array Creation & Basics"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np
+",
+    "import sys
+",
+    "
+",
+    "# 1. Multiples of 7 between 7 and 100
+",
+    "arr7 = np.arange(7, 101, 7)
+",
+    "print("1. Multiples of 7:", arr7)
+",
+    "print("Length:", len(arr7))
+",
+    "
+",
+    "# 2. 4x4 array filled with 9
+",
+    "arr9 = np.full((4, 4), 9)
+",
+    "print("\n2. 4x4 array of 9s:\n", arr9)
+",
+    "
+",
+    "# 3. 1-D array of 10 elements converted to float
+",
+    "arr_int = np.arange(10)
+",
+    "arr_float = arr_int.astype(float)
+",
+    "print("\n3. Float array:", arr_float)
+",
+    "print("Data type:", arr_float.dtype)
+",
+    "
+",
+    "# 4. Memory comparison
+",
+    "py_list = list(range(1000))
+",
+    "np_arr = np.array(py_list)
+",
+    "print(f"\n4. List size: {sys.getsizeof(py_list)} bytes")
+",
+    "print(f"NumPy array size: {np_arr.nbytes} bytes (raw data)")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Indexing & Slicing"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 5. Corner elements of 6x6 array
+",
+    "arr6x6 = np.arange(36).reshape(6, 6)
+",
+    "corners = arr6x6[[0, 0, -1, -1], [0, -1, 0, -1]]
+",
+    "print("5. Corner elements:", corners)
+",
+    "
+",
+    "# 6. Every third element starting from index 1
+",
+    "arr12 = np.arange(12)
+",
+    "print("6. Every 3rd from index 1:", arr12[1::3])
+",
+    "
+",
+    "# 7. Reverse order of rows
+",
+    "arr5x5 = np.arange(25).reshape(5, 5)
+",
+    "reversed_rows = arr5x5[::-1, :]
+",
+    "print("\n7. Reversed rows:\n", reversed_rows)
+",
+    "
+",
+    "# 8. Boolean indexing replacement (divisible by 3)
+",
+    "arr_div = np.array([1, 3, 4, 6, 7, 9, 10])
+",
+    "arr_div[arr_div % 3 == 0] = -1
+",
+    "print("\n8. Replace divisible by 3:", arr_div)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Array Operations"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 9. Normalize array between 0 and 1
+",
+    "arr_norm = np.array([10, 20, 30, 40, 50])
+",
+    "normed = (arr_norm - arr_norm.min()) / (arr_norm.max() - arr_norm.min())
+",
+    "print("9. Normalized array:", normed)
+",
+    "
+",
+    "# 10. Transpose verification
+",
+    "mat3x3 = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+",
+    "transpose = mat3x3.T
+",
+    "print("\n10. Transpose of Transpose matches original:", np.array_equal(transpose.T, mat3x3))
+",
+    "
+",
+    "# 11. Max value and index
+",
+    "random_arr = np.random.randint(0, 100, 10)
+",
+    "print(f"\n11. Array: {random_arr}")
+",
+    "print(f"Max: {random_arr.max()}, Index: {np.argmax(random_arr)}")
+",
+    "
+",
+    "# 12. Element-wise remainder
+",
+    "a = np.array([10, 20, 30])
+",
+    "b = np.array([3, 7, 9])
+",
+    "print("\n12. Remainder:", np.mod(a, b))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Concatenation & Reshaping"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 13. Stack two 2x3 arrays into (2, 2, 3)
+",
+    "a23 = np.zeros((2, 3))
+",
+    "b23 = np.ones((2, 3))
+",
+    "stacked = np.stack((a23, b23), axis=0)
+",
+    "print("13. Stacked shape:", stacked.shape)
+",
+    "
+",
+    "# 14. Concatenate unequal 1-D arrays
+",
+    "d1 = np.array([1, 2])
+",
+    "d2 = np.array([3, 4, 5])
+",
+    "d3 = np.array([6])
+",
+    "combined = np.concatenate((d1, d2, d3))
+",
+    "print("14. Combined:", combined)
+",
+    "
+",
+    "# 15. Reshape and Transpose (column-major equivalent)
+",
+    "arr16 = np.arange(16)
+",
+    "mat4x4 = arr16.reshape(4, 4)
+",
+    "col_major = mat4x4.T
+",
+    "print("\n15. Column-major equivalent:\n", col_major)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Splitting"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 16. Split (2, 4, 4) into two parts along axis 0
+",
+    "arr3d = np.random.rand(2, 4, 4)
+",
+    "parts = np.split(arr3d, 2, axis=0)
+",
+    "print("16. Part 1 shape:", parts[0].shape)
+",
+    "
+",
+    "# 17. array_split for 17 elements into 4 parts
+",
+    "arr17 = np.arange(17)
+",
+    "splits = np.array_split(arr17, 4)
+",
+    "print("17. Split sizes:", [s.size for s in splits])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Statistics"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 18. Remove outliers (> 2 std devs)
+",
+    "data = np.array([10, 12, 12, 13, 12, 11, 100])
+",
+    "mean, std = np.mean(data), np.std(data)
+",
+    "filtered = data[np.abs(data - mean) <= 2 * std]
+",
+    "print("18. Filtered data:", filtered)
+",
+    "
+",
+    "# 19. Student and Subject averages
+",
+    "marks = np.random.randint(50, 100, (5, 4))
+",
+    "print("\n19. Student Averages:", np.mean(marks, axis=1))
+",
+    "print("Subject Averages:", np.mean(marks, axis=0))
+",
+    "
+",
+    "# 20. Correlation coefficient
+",
+    "x = np.array([1, 2, 3, 4, 5])
+",
+    "y = np.array([2, 4, 5, 4, 5])
+",
+    "print("\n20. Correlation:\n", np.corrcoef(x, y))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### File I/O"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 21. Save and load CSV
+",
+    "rand_5x5 = np.random.randint(0, 100, (5, 5))
+",
+    "np.savetxt('data.csv', rand_5x5, delimiter=',')
+",
+    "loaded_csv = np.loadtxt('data.csv', delimiter=',')
+",
+    "print("21. CSV Load Match:", np.array_equal(rand_5x5, loaded_csv.astype(int)))
+",
+    "
+",
+    "# 22. Save multiple arrays to .npz
+",
+    "np.savez('arrays.npz', arr1=d1, arr2=d2, arr3=d3)
+",
+    "with np.load('arrays.npz') as data_npz:
+",
+    "    print("22. Files in NPZ:", data_npz.files)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### NumPy Random Module"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# 23. Random 3x3 (10-50) and sort rows
+",
+    "rand_mat = np.random.randint(10, 50, (3, 3))
+",
+    "sorted_rows = np.sort(rand_mat, axis=1)
+",
+    "print("23. Sorted rows:\n", sorted_rows)
+",
+    "
+",
+    "# 24. Biased coin flip (70% heads)
+",
+    "flips = np.random.binomial(n=1, p=0.7, size=200)
+",
+    "print(f"\n24. Proportion of heads: {np.mean(flips)}")
+",
+    "
+",
+    "# 25. Normal distribution (mean 0, std 2)
+",
+    "norm_samples = np.random.normal(0, 2, 2000)
+",
+    "outside = np.sum(np.abs(norm_samples) > 4)
+",
+    "print(f"\n25. Values outside [-4, 4]: {outside}")
+",
+    "
+",
+    "# 26. Poisson distribution (visits per minute)
+",
+    "visits = np.random.poisson(lam=5, size=60)
+",
+    "print(f"\n26. Max visits: {visits.max()} at minute {np.argmax(visits)}")
+",
+    "
+",
+    "# 27. Multinomial survey simulation
+",
+    "survey = np.random.multinomial(200, [0.5, 0.3, 0.2])
+",
+    "print(f"\n27. Product counts: {survey}")
+",
+    "
+",
+    "# 28. Deck permutation and deal
+",
+    "deck = np.random.permutation(np.arange(1, 53))
+",
+    "hand = deck[:5]
+",
+    "print(f"\n28. Hand dealt: {hand}")"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.0"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
